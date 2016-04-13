@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = UMDLibStyle::VERSION
   s.authors     = ["Peter Eichman"]
   s.email       = ["peichman@umd.edu"]
-  s.homepage    = "https://github.com/umd-lib"
+  s.homepage    = "https://github.com/umd-lib/umd_lib_style"
   s.summary     = "UMD Libraries branding for Rails applications."
   s.description = "Provides UMD Libraries branding for Rails applications. Uses Bootstrap 3.3.6."
 
