@@ -1,3 +1,3 @@
-module UmdLibStyle
+module UMDLibStyle
   VERSION = "0.0.1"
 end

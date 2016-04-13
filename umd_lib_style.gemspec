@@ -6,7 +6,7 @@ require "umd_lib_style/version"
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
   s.name        = "umd_lib_style"
-  s.version     = UmdLibStyle::VERSION
+  s.version     = UMDLibStyle::VERSION
   s.authors     = ["Peter Eichman"]
   s.email       = ["peichman@umd.edu"]
   s.homepage    = "https://github.com/umd-lib"

@@ -1,7 +1,7 @@
 require 'test_helper'
 
-class UmdLibStyleTest < ActiveSupport::TestCase
+class UMDLibStyleTest < ActiveSupport::TestCase
   test "truth" do
-    assert_kind_of Module, UmdLibStyle
+    assert_kind_of Module, UMDLibStyle
   end
 end
