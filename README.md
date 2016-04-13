@@ -36,6 +36,10 @@ If you are starting from an app that already loaded Bootstrap directly into your
 
 In addition, your app will no longer need the `bootstrap-sass` gem and you can remove it from your Gemfile.
 
+## Scaffolding CSS
+
+If you generated your app with Rails scaffolding, you should remove the *app/assets/stylesheets/scaffold.css.scss* file, to remove any potential conflicts with the Bootstrap styles.
+
 ## Custom Navbar
 
 To include your own custom markup in the navbar, add a `content_for` block to your *app/views/layout/application.html.erb* file. For example:
