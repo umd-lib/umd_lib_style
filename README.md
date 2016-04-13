@@ -7,7 +7,7 @@ Gem containing the common UMD Libraries Rails application layout and styles. Bui
 In your app's Gemfile:
 
 ```ruby
-gem 'umd_lib_style', github: 'umd-lib/umd_lib_style'
+gem 'umd_lib_style', github: 'umd-lib/umd_lib_style', branch: 'develop'
 ```
 
 Then run the usual:
