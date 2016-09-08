@@ -40,9 +40,16 @@ In addition, your app will no longer need the `bootstrap-sass` gem and you can r
 
 If you generated your app with Rails scaffolding, you should remove the *app/assets/stylesheets/scaffold.css.scss* file, to remove any potential conflicts with the Bootstrap styles.
 
-## Custom Navbar
+## content_for blocks
 
-To include your own custom markup in the navbar, add a `content_for` block to your *app/views/layout/application.html.erb* file. For example:
+The "content_for" block allows for additions/customization of particular sections of the layout. 
+### Custom Navbar - navbar
+
+This gem provides a fixed full page width navigation bar at the top of the page, containing the application name and a set of drop-down menus.
+
+#### Sample Usage
+
+The application name is set using a "app_name" block. To include your own custom markup in the navbar, add a `content_for` block to your *app/views/layout/application.html.erb* file.
 
 ```erb
 <% provide :app_name, 'Autonumber Service' %>
@@ -56,6 +63,18 @@ To include your own custom markup in the navbar, add a `content_for` block to yo
 <% end %>
 
 <%= render 'layouts/umd_lib' %>
+```
+
+### Custom Nav Banner - "navbar_banner"
+
+Displays a full page width banner directly below the navbar, which will not scroll off the screen. Used by the Annual Staffing Request application to show a banner when impersonating another user.
+
+#### Sample Usage
+
+```erb
+<% content_for :navbar_banner do %>
+  <%= render 'layouts/impersonate' %>
+<% end %>
 ```
 
 [1]: https://github.com/twbs/bootstrap-sass/archive/v3.3.6.tar.gz
