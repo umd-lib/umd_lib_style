@@ -8,6 +8,9 @@ $navbar-inverse-color: black;
 $logo-height: 50px;
 $navbar-height: $logo-height + 10px;
 
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
 .logo {
 	padding: 10px 0;
 }
@@ -74,6 +77,8 @@ body {
 	float: right;
 }
 .navbar-brand {
+  /* Turn off float:left from bootstrap, restore to default */
+  float: none;
 	padding: 25.5px 15px 25px 40px;
 }
 
@@ -147,7 +152,9 @@ body {
 	margin-bottom: 5px
 }
 .navbar-brand {
-    padding: 15px 10px 15px 40px;
+  /* Turn off float:left from bootstrap, restore to default */
+  float: none;
+  padding: 15px 10px 15px 40px;
 }
 .navbar-form .form-group:last-child {
 	margin-bottom: 0
@@ -231,5 +238,3 @@ body {
 }
 }
 
-@import "bootstrap-sprockets";
-@import "bootstrap";
