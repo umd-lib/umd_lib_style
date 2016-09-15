@@ -8,6 +8,8 @@ $navbar-inverse-color: black;
 $logo-height: 50px;
 $navbar-height: $logo-height + 10px;
 
+$grid-float-breakpoint: 1200px !default;
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
@@ -39,7 +41,7 @@ body {
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: $grid-float-breakpoint) {
   .navbar-nav>li>a {
     padding-top: 25.5px;
     padding-bottom: 25.5px
@@ -56,7 +58,7 @@ body {
   }
 }
 
-@media (max-width: 1199px) {
+@media (max-width: $grid-float-breakpoint - 1px) {
   .navbar-brand {
     /* Turn off float:left from bootstrap, restore to default */
     float: none;
