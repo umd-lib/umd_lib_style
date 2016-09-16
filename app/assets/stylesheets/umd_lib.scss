@@ -5,30 +5,81 @@ $navbar-inverse-bg: $umd-red;
 $navbar-inverse-link-color: white;
 $navbar-inverse-color: black;
 
-$logo-height: 61px;
+$logo-height: 50px;
 $navbar-height: $logo-height + 10px;
 
-.logo {
-    padding: 5px;
-}
-body {
-    padding-top: $navbar-height + 10px !important;
-}
-.btn-group {
-    // remove the extra margins from the will_paginate widget
-    // so it will align with the other buttons in the toolbar
-    .pagination {
-        margin: 0;
-    }
-}
-
-.field_with_errors {
-    input, select {
-        // color is state-danger-text
-        // bootstrap-sass doesn't seem to have that variable defined
-        border: 2px solid #a94442;
-    }
-}
+$grid-float-breakpoint: 1200px !default;
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.logo {
+  padding: 10px 0;
+}
+
+.logo img{
+  height: $logo-height;
+}
+
+body {
+  padding-top: $navbar-height + 10px !important;
+}
+
+.btn-group {
+  // remove the extra margins from the will_paginate widget
+  // so it will align with the other buttons in the toolbar
+  .pagination {
+    margin: 0;
+  }
+}
+
+.field_with_errors {
+  input, select {
+    // color is state-danger-text
+    // bootstrap-sass doesn't seem to have that variable defined
+    border: 2px solid #a94442;
+  }
+}
+
+@media (min-width: $grid-float-breakpoint) {
+  .navbar-nav>li>a {
+    padding-top: 25.5px;
+    padding-bottom: 25.5px
+  }
+  
+  .navbar-nav {
+    float: right;
+  }
+
+  .navbar-brand {
+    /* Turn off float:left from bootstrap, restore to default */
+    float: none;
+    padding: 25.5px 15px 25px 40px;
+  }
+}
+
+@media (max-width: $grid-float-breakpoint - 1px) {
+  .navbar-brand {
+    /* Turn off float:left from bootstrap, restore to default */
+    float: none;
+    padding: 15px 10px 15px 40px;
+  }
+}
+
+@media screen and (max-width: 767px) { 
+  .navbar-brand {
+    padding: 15px 10px 15px 10px;
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .logo img {
+    padding: 0 50px 10px 5px;
+  }
+
+  .logo span {
+    display: block;
+  }
+}
+
