@@ -12,6 +12,7 @@ $grid-float-breakpoint: 1200px !default;
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "umd_lib_environment_banner";
 
 .logo {
   padding: 10px 0;
