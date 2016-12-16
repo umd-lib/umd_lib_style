@@ -7,8 +7,27 @@
   <%= csrf_meta_tags %>
 </head>
 <body role="document">
-  <%= umd_lib_environment_banner %>
   <nav class="navbar navbar-inverse navbar-fixed-top">
+    <%= umd_lib_environment_banner %>
+    
+    <!-- The following script changes the padding of the body, if the
+         environment banner is present. -->
+    <script>
+      var bannerDiv = document.getElementsByClassName("environment-banner")[0];
+      if (bannerDiv) {
+        var bannerStyle = bannerDiv.currentStyle || window.getComputedStyle(bannerDiv);
+        var bannerHeight = parseInt(bannerStyle.height, 10);
+        
+        var bodyElement = document.body;
+        var bodyStyle = bodyElement.currentStyle || window.getComputedStyle(bodyElement);
+        var bodyPaddingTop = parseInt(bodyStyle.paddingTop, 10);
+        
+        var newBodyPaddingTop = bodyPaddingTop + bannerHeight;
+        var newBodyPaddingTopStr = "padding-top: "+newBodyPaddingTop + "px !important;";
+        bodyElement.setAttribute('style', newBodyPaddingTopStr);
+      }
+    </script>
+    
     <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
