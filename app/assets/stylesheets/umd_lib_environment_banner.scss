@@ -1,6 +1,6 @@
 // https://confluence.umd.edu/display/LIB/Create+Environment+Banners
 .environment-banner {
-    height: 25px;
+    height: $env-banner-height;
     padding: 2px 25px;
 
     &#environment-local {

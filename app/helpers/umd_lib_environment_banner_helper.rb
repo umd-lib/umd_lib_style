@@ -8,6 +8,14 @@ module UMDLibEnvironmentBannerHelper
     end
   end
 
+  # When the banner is visible, add the extra-padding-top class
+  # to increase body padding
+  def extra_padding_top 
+    if environment
+      return 'extra-padding-top'
+    end
+  end
+
   # Returns 'Local', 'Development', 'Staging', or nil (indicating a production
   # server), depending on the server environment.
   #
@@ -28,4 +36,5 @@ module UMDLibEnvironmentBannerHelper
     
     # Otherwise return nil, indicating production
   end
+
 end
