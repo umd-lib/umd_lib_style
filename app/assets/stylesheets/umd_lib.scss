@@ -10,6 +10,8 @@ $navbar-height: $logo-height + 10px;
 
 $grid-float-breakpoint: 1200px !default;
 
+$env-banner-height: 25px;
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "umd_lib_environment_banner";
@@ -24,6 +26,10 @@ $grid-float-breakpoint: 1200px !default;
 
 body {
   padding-top: $navbar-height + 10px !important;
+}
+
+.extra-padding-top {
+  padding-top: $navbar-height + $env-banner-height + 10px !important;
 }
 
 .btn-group {
