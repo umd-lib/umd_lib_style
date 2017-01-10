@@ -88,5 +88,13 @@ The environment banner will attempt to auto-detect the correct environment. To o
  * "Staging"
  * "Production" - This is only needed to force the "production" setting (i.e., not show the banner) on a server that would otherwise show some other value. Production systems do _not_ need to set this value.
 
+### Page Content Container class
+
+ By default, the content of the page is placed in a \<div> using the Bootstrap "container" class. Applications (such as Annual Staffing Request) may wish to override this setting to use some other class, such as "container-fluid". To do so, add the following "provide" line to your *app/views/layout/application.html.erb* file:
+
+```erb
+<% provide :container_class, "container-fluid" %>
+```
+
 [1]: https://github.com/twbs/bootstrap-sass/archive/v3.3.6.tar.gz
 [2]: https://confluence.umd.edu/display/LIB/Create+Environment+Banners

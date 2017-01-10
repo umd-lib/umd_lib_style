@@ -32,7 +32,7 @@
     <%= yield :navbar_banner %>
   </nav>
 
-  <div class="container">
+  <div class="<%= content_for?(:container_class) ? yield(:container_class) : "container"  %>">
     <% if notice %>
       <div class="alert alert-success" role="alert"><%= notice %></div>
     <% end %>
