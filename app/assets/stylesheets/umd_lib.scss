@@ -12,6 +12,8 @@ $grid-float-breakpoint: 1200px !default;
 
 $env-banner-height: 25px;
 
+$footer-height: 25px;
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "umd_lib_environment_banner";
@@ -24,12 +26,27 @@ $env-banner-height: 25px;
   height: $logo-height;
 }
 
-body {
-  padding-top: $navbar-height + 10px !important;
+html {
+  height: 100%;
 }
 
-.extra-padding-top {
+body {
+  height: 100%;
+  margin: 0;
+}
+
+#viewport {
+  padding-top: $navbar-height + 10px !important;
+  min-height: 100%;
+  position: relative;
+}
+
+#viewport.extra-padding-top {
   padding-top: $navbar-height + $env-banner-height + 10px !important;
+}
+
+.content {
+  padding-bottom: $footer-height; 
 }
 
 .btn-group {
@@ -45,6 +62,19 @@ body {
     // color is state-danger-text
     // bootstrap-sass doesn't seem to have that variable defined
     border: 2px solid #a94442;
+  }
+}
+
+.footer {
+  background: #272727;
+  height: $footer-height;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+
+  a {
+    color: #eee;
+    font-weight: 500;
   }
 }
 

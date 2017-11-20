@@ -42,7 +42,7 @@ If you generated your app with Rails scaffolding, you should remove the *app/ass
 
 ## content_for blocks
 
-The "content_for" block allows for additions/customization of particular sections of the layout. 
+The "content_for" block allows for additions/customization of particular sections of the layout.
 ### Custom Navbar - navbar
 
 This gem provides a fixed full page width navigation bar at the top of the page, containing the application name and a set of drop-down menus.
@@ -95,6 +95,39 @@ The environment banner will attempt to auto-detect the correct environment. To o
 ```erb
 <% provide :container_class, "container-fluid" %>
 ```
+
+### Footer - "application_footer"
+
+Per UMD policy, a footer containing a "Web Accessibility" link is provided by
+default. Applications wishing to override the default footer can do so by
+defining a "content_for" block to your *app/views/layout/application.html.erb*
+file.
+
+#### Sample Usage
+
+```erb
+<% content_for :application_footer do %>
+  <footer class="footer">
+    <p>Custom footer</p>
+  </footer>
+<% end %>
+```
+
+The height of the footer is fixed at 25 pixels. If an application needs to
+change the height of the footer, the "padding-bottom" parameter of the "content"
+class should also be changed. For example, to change the height of the "footer"
+class to 50 pixels, add the following to the application's CSS file:
+
+```css
+.content {
+  padding-bottom: 50px;
+}
+
+.footer {
+  height: 50px;
+}
+```
+
 
 [1]: https://github.com/twbs/bootstrap-sass/archive/v3.3.6.tar.gz
 [2]: https://confluence.umd.edu/display/LIB/Create+Environment+Banners
