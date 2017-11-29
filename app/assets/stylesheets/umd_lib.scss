@@ -12,7 +12,10 @@ $grid-float-breakpoint: 1200px !default;
 
 $env-banner-height: 25px;
 
-$footer-height: 25px;
+$footer-height: 45px;
+$footer-padding-size: 10px;
+$footer-padding: $footer-padding-size 0;
+$footer-border-size: 1px;
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
@@ -46,7 +49,7 @@ body {
 }
 
 .content {
-  padding-bottom: $footer-height; 
+  padding-bottom: $footer-height + ($footer-padding-size * 2) +$footer-border-size;
 }
 
 .btn-group {
@@ -66,14 +69,16 @@ body {
 }
 
 .footer {
-  background: #272727;
+  background-color: #f5f5f5;
+  border-top: $footer-border-size solid #999999;
   height: $footer-height;
   position: absolute;
   bottom: 0;
   width: 100%;
+  padding: $footer-padding;
 
   a {
-    color: #eee;
+    color: #035E8C;
     font-weight: 500;
   }
 }
@@ -83,7 +88,7 @@ body {
     padding-top: 25.5px;
     padding-bottom: 25.5px
   }
-  
+
   .navbar-nav {
     float: right;
   }
@@ -103,7 +108,7 @@ body {
   }
 }
 
-@media screen and (max-width: 767px) { 
+@media screen and (max-width: 767px) {
   .navbar-brand {
     padding: 15px 10px 15px 10px;
     font-size: 18px;
