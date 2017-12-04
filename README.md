@@ -2,12 +2,30 @@
 
 Gem containing the common UMD Libraries Rails application layout and styles. Built on Bootstrap 3.3.6.
 
+## Git Tagging
+
+When a new version of this gem is created, be sure to update the version
+number in the lib/umd_style/version.rb to match the Git tag.
+
 ## Usage
 
 In your app's Gemfile:
 
 ```ruby
 gem 'umd_lib_style', github: 'umd-lib/umd_lib_style', branch: 'develop'
+```
+
+to use the "develop" branch version of the gem, or
+
+```ruby
+gem 'umd_lib_style', github: 'umd-lib/umd_lib_style', ref: '<GIT_TAG>'
+```
+
+where <GIT_TAG> is the Git tag of the version to use. For example, to use
+the Git tagged "1.0.1" version, use:
+
+```ruby
+gem 'umd_lib_style', github: 'umd-lib/umd_lib_style', ref: '1.0.1'
 ```
 
 Then run the usual:
