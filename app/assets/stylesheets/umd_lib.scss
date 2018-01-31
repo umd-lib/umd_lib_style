@@ -12,7 +12,6 @@ $grid-float-breakpoint: 1200px !default;
 
 $env-banner-height: 25px;
 
-$footer-height: 45px;
 $footer-padding-size: 10px;
 $footer-padding: $footer-padding-size 0;
 $footer-border-size: 1px;
@@ -48,10 +47,6 @@ body {
   padding-top: $navbar-height + $env-banner-height + 10px !important;
 }
 
-.content {
-  padding-bottom: $footer-height + ($footer-padding-size * 2) +$footer-border-size;
-}
-
 .btn-group {
   // remove the extra margins from the will_paginate widget
   // so it will align with the other buttons in the toolbar
@@ -71,9 +66,6 @@ body {
 .footer {
   background-color: #f5f5f5;
   border-top: $footer-border-size solid #999999;
-  height: $footer-height;
-  position: absolute;
-  bottom: 0;
   width: 100%;
   padding: $footer-padding;
 
@@ -81,6 +73,26 @@ body {
     color: #035E8C;
     font-weight: 500;
   }
+}
+
+.site {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+}
+
+.site-content {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
 }
 
 @media (min-width: $grid-float-breakpoint) {
