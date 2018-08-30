@@ -131,26 +131,5 @@ file.
 <% end %>
 ```
 
-The height of the footer is fixed at 45 pixels, with 10 pixels of top and bottom
-padding, and a 1 pixel top border. If an application needs to change the height
-of the footer, or any of the padding, the "padding-bottom" parameter of the
-"content" class should also be changed to match the total height of the
-footer (i.e., $footer-height + (2 * $footer-padding-size) + $footer-border-size).
- For example, to change the height of the "footer"
-class to 60 pixels, add the following to the application's CSS file:
-
-```css
-.content {
-  padding-bottom: 81px; // 60 + (2 * 10) + 1
-}
-
-.footer {
-  height: 60px;
-  border-top: 1px solid #999999;
-  padding: 10px 0;
-}
-```
-
-
 [1]: https://github.com/twbs/bootstrap-sass/archive/v3.3.6.tar.gz
 [2]: https://confluence.umd.edu/display/LIB/Create+Environment+Banners

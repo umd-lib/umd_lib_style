@@ -7,10 +7,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body role="document">
-  <div id="viewport" class="<%= extra_padding_top %>">
+  <div id="viewport" class="<%= extra_padding_top %> site">
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <%= umd_lib_environment_banner %>
-      
+
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -32,20 +32,20 @@
       </div>
       <%= yield :navbar_banner %>
     </nav>
-    
-    <div class="content">
+
+    <div class="content site-content">
       <div class="<%= content_for?(:container_class) ? yield(:container_class) : "container"  %>">
         <% if notice %>
           <div class="alert alert-success" role="alert"><%= notice %></div>
         <% end %>
-    
+
         <%= yield %>
       </div>
     </div>
-    
+
     <% if content_for?(:application_footer) %>
       <%= yield :application_footer %>
-    <% else %>    
+    <% else %>
       <footer class="footer">
         <div class="<%= content_for?(:container_class) ? yield(:container_class) : "container"  %>">
           <a class="pull-right" href="https://umd.edu/web-accessibility" target="_blank">Web Accessibility</a>
