@@ -5,6 +5,7 @@
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
+  <%= yield :additional_head_content %>
 </head>
 <body role="document">
   <div id="viewport" class="<%= extra_padding_top %> site">

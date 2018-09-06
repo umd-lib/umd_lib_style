@@ -61,6 +61,25 @@ If you generated your app with Rails scaffolding, you should remove the *app/ass
 ## content_for blocks
 
 The "content_for" block allows for additions/customization of particular sections of the layout.
+
+### Additional "head" content - additional_head_content
+
+Enables additional directives to be added into the "head" section of the HTML
+page.
+
+#### Sample Usage
+
+In Rails 5.2, an additional "csp_meta" tag is added into the "head" section of
+the layouts/application.html.erb file. To include this tag into a Rails
+application using this gem, add a `content_for` block to your
+*app/views/layout/application.html.erb* file
+
+```erb
+<% content_for :additional_head_content do %>
+  <%= csp_meta_tag %>
+<% end %>
+```
+
 ### Custom Navbar - navbar
 
 This gem provides a fixed full page width navigation bar at the top of the page, containing the application name and a set of drop-down menus.
