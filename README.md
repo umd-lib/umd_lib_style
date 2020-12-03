@@ -3,6 +3,10 @@
 Gem containing the common UMD Libraries Rails application layout and styles.
 Built on Bootstrap 3.3.6.
 
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for information about changes to this gem.
+
 ## Git Tagging
 
 When a new version of this gem is created, be sure to update the version
@@ -77,7 +81,7 @@ sections of the layout.
 Enables additional directives to be added into the "head" section of the HTML
 page.
 
-#### Sample Usage
+#### Additional "head" content - Sample Usage
 
 In Rails 5.2, an additional "csp_meta" tag is added into the "head" section of
 the layouts/application.html.erb file. To include this tag into a Rails
@@ -95,8 +99,7 @@ application using this gem, add a `content_for` block to your
 This gem provides a fixed full page width navigation bar at the top of the page,
 containing the application name and a set of drop-down menus.
 
-
-#### Sample Usage
+#### Custom Navbar - Sample Usage
 
 The application name is set using a "app_name" block. To include your own custom
 markup in the navbar, add a `content_for` block to your
@@ -122,7 +125,7 @@ Displays a full page width banner directly below the navbar, which will not
 scroll off the screen. Used by the Annual Staffing Request application to show a
 banner when impersonating another user.
 
-#### Sample Usage
+#### Custom Nav Banner - Sample Usage
 
 ```erb
 <% content_for :navbar_banner do %>
@@ -133,21 +136,22 @@ banner when impersonating another user.
 ### Environment Banner
 
 In keeping with [SSDR policy][2], an "environment banner" will be displayed at
-the top of each page when running on non-production servers, indicating whether
-the application is running on a "Local", "Development", or "Staging" server.
-This banner does _not_ appear on production systems.
+the top of each page when running on non-production servers.
 
-The environment banner will attempt to auto-detect the correct environment. To
-override this auto-detection functionality (or to modify it for testing), an
-"ENVIRONMENT_BANNER" environment banner can be used with any of the following
-values (which are case-insensitive):
+By default, in the local development environment (determined by
+`Rails.env.development?` returning `true`), a "Local Environment" banner will be
+displayed.
 
-* "Local"
-* "Development"
-* "Staging"
-* "Production" - This is only needed to force the "production" setting (i.e.,
-not show the banner) on a server that would otherwise show some other value.
-Production systems do _not_ need to set this value.
+On non-production servers, the environment banner can be configured using the
+following environment variables:
+
+* ENVIRONMENT_BANNER - the text to display in the banner
+* ENVIRONMENT_BANNER_FOREGROUND - the foreground color for the banner, as a CSS
+  color
+* ENVIRONMENT_BANNER_BACKGROUND - the background color for the banner, as a CSS
+  color
+* ENVIRONMENT_BANNER_ENABLED - (optional) Anything other than "true" disables
+  the banner.
 
 ### Page Content Container class
 
@@ -168,7 +172,7 @@ default. Applications wishing to override the default footer can do so by
 defining a "content_for" block to your *app/views/layout/application.html.erb*
 file.
 
-#### Sample Usage
+#### Footer - Sample Usage
 
 ```erb
 <% content_for :application_footer do %>
