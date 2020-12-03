@@ -11,13 +11,18 @@ module UMDLibEnvironmentBannerHelper
       # defaults to the HostEnvironmentBanner implementation
       banner = EnvVarsEnvironmentBanner.new
       if !banner.enabled?
-        banner = HostEnvironmentBanner.new
+        banner = DevelopmentEnvironmentBanner.new
       end
       @@banner = banner
       @@banner_initialized = true
     end
 
     @@banner
+  end
+
+  # Resets the banner -- intended be used only for testing
+  def self.reset
+    @@banner_initialized = false
   end
 
   # https://confluence.umd.edu/display/LIB/Create+Environment+Banners
@@ -53,6 +58,9 @@ module UMDLibEnvironmentBannerHelper
       return 'extra-padding-top'
     end
   end
+
+  # Banner implementation classes -- these are not intended to be called
+  # directly
 
     # Returns an environment banner based on ENV config properties
     class EnvVarsEnvironmentBanner
@@ -129,8 +137,8 @@ module UMDLibEnvironmentBannerHelper
       end
     end
 
-  # Returns an environment banner based on host properties
-  class HostEnvironmentBanner
+  # Returns a default environment banner for Rails development environment
+  class DevelopmentEnvironmentBanner
     attr_accessor :text
     attr_accessor :css_options
 
@@ -154,16 +162,7 @@ module UMDLibEnvironmentBannerHelper
     private
 
       def environment_name
-        environment_name_from_host = case Socket.gethostname.split(".").first
-        when /local$/
-         'Local'
-        when /dev$/
-         'Development'
-        when /stage$/
-          'Staging'
-        end
-
-        ( Rails.env.development? || Rails.env.vagrant? ) ? "Local" : environment_name_from_host
+        ( Rails.env.development? || Rails.env.vagrant? ) ? "Local" : nil
       end
   end
 end
