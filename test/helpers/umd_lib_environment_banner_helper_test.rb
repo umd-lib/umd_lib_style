@@ -91,6 +91,14 @@ class UMDLibEnvironmentBannerHelperTest < ActiveSupport::TestCase
       @banner.umd_lib_environment_banner)
   end
 
+  test 'Verify that "extra_padding_top" is enabled on first invocation' do
+    banner = Object.new
+    banner.extend(UMDLibEnvironmentBannerHelper)
+
+    Rails.env = 'development'
+    assert_equal('extra-padding-top', banner.extra_padding_top)
+  end
+
   def teardown
     # Unset environment variables
     Rails.env = 'test'

@@ -1,20 +1,39 @@
 module UMDLibEnvironmentBannerHelper
+  # True if the banner has been initialized, false otherwise
   @@banner_initialized = false
+  # Holds the banner ibject
   @@banner = nil
+  # Holds the HTML for the banner (if any)
+  @@banner_html = nil
 
   # Initializes the banner
   def self.initialize
     # Uses @@banner_initialized to skip regenerating banner each time the
     # module is called.
     if !@@banner_initialized
+      @@banner_initialized = true
+      return if ENV['ENVIRONMENT_BANNER_ENABLED'] == 'false'
+
       # The EnvVarsEnvironmentBanner banner is used, if enabled, otherwise
       # defaults to the HostEnvironmentBanner implementation
       banner = EnvVarsEnvironmentBanner.new
       if !banner.enabled?
         banner = DevelopmentEnvironmentBanner.new
       end
+
       @@banner = banner
-      @@banner_initialized = true
+
+      if @@banner.enabled?
+        # Configure banner HTML
+        css_options = @@banner.css_options
+        # Sort to get consistent ordering of keys
+        css_string = css_options.sort.to_h.map { |key,value| "#{key}='#{value}'" }.join(" ")
+        banner_text = @@banner.text
+        @@banner_html = "<div #{css_string}>#{banner_text}</div>".html_safe
+        return @@banner_html
+      else
+        @@banner_html = nil
+      end
     end
 
     @@banner
@@ -23,37 +42,22 @@ module UMDLibEnvironmentBannerHelper
   # Resets the banner -- intended be used only for testing
   def self.reset
     @@banner_initialized = false
+    @@banner = nil
+    @@banner_html = nil
   end
 
   # https://confluence.umd.edu/display/LIB/Create+Environment+Banners
+  #
   def umd_lib_environment_banner
-    if !@@banner_initialized
-      # Uses @@banner_initialized to skip regenerating HTML each time the
-      # method is called.
-      banner = UMDLibEnvironmentBannerHelper.initialize
-
-      # ENVIRONMENT_BANNER_ENABLED always takes precedence
-      if ENV['ENVIRONMENT_BANNER_ENABLED'] == 'false'
-        return @@banner_html = nil
-      end
-
-      if banner.enabled?
-        css_options = banner.css_options
-        # Sort to get consistent ordering of keys
-        css_string = css_options.sort.to_h.map { |key,value| "#{key}='#{value}'" }.join(" ")
-        banner_text = banner.text
-        @@banner_html = "<div #{css_string}>#{banner_text}</div>".html_safe
-        return @@banner_html
-      else
-        @@banner_html = nil
-      end
-    end
+    UMDLibEnvironmentBannerHelper.initialize if !@@banner_initialized
     @@banner_html
   end
 
   # When the banner is visible, add the extra-padding-top class
   # to increase body padding
   def extra_padding_top
+    UMDLibEnvironmentBannerHelper.initialize if !@@banner_initialized
+
     if @@banner && @@banner.enabled?
       return 'extra-padding-top'
     end
