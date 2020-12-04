@@ -47,12 +47,32 @@ class UMDLibEnvironmentBannerHelperTest < ActiveSupport::TestCase
       @banner.umd_lib_environment_banner)
   end
 
-  test 'ENVIRONMENT_BANNER_ENABLED of "false" prevent banner display' do
-    ENV['ENVIRONMENT_BANNER'] = 'TestingForegroundAndBackground'
+  test 'ENVIRONMENT_BANNER_ENABLED of "false" prevents banner display' do
+    ENV['ENVIRONMENT_BANNER'] = 'BannerEnabledFalse'
     ENV['ENVIRONMENT_BANNER_FOREGROUND'] = '#ff0000'
     ENV['ENVIRONMENT_BANNER_BACKGROUND'] = '#777777'
     ENV['ENVIRONMENT_BANNER_ENABLED'] = 'false'
     assert_nil(@banner.umd_lib_environment_banner)
+  end
+
+  test 'A blank ENVIRONMENT_BANNER_ENABLED enables banner display' do
+    ENV['ENVIRONMENT_BANNER'] = 'BannerEnabledBlank'
+    ENV['ENVIRONMENT_BANNER_FOREGROUND'] = '#ff0000'
+    ENV['ENVIRONMENT_BANNER_BACKGROUND'] = '#777777'
+    ENV['ENVIRONMENT_BANNER_ENABLED'] = ''
+    assert_equal(
+      "<div class='environment-banner' style='background-color: #777777; color: #ff0000;'>BannerEnabledBlank</div>",
+      @banner.umd_lib_environment_banner)
+  end
+
+  test 'A ENVIRONMENT_BANNER_ENABLED of "true" enables banner display' do
+    ENV['ENVIRONMENT_BANNER'] = 'BannerEnabledTrue'
+    ENV['ENVIRONMENT_BANNER_FOREGROUND'] = '#ff0000'
+    ENV['ENVIRONMENT_BANNER_BACKGROUND'] = '#777777'
+    ENV['ENVIRONMENT_BANNER_ENABLED'] = 'true'
+    assert_equal(
+      "<div class='environment-banner' style='background-color: #777777; color: #ff0000;'>BannerEnabledTrue</div>",
+      @banner.umd_lib_environment_banner)
   end
 
   test 'Banner is not displayed by default in production' do
