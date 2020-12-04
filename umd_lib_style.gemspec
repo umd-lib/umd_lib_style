@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", ">= 4.2.6"
 
-  # Restrict to Rails 4.2.x for development, so that tests will run
+  # Restrict to Rails 4.2.x and sqlite3 for development, so that tests will run
   s.add_development_dependency "rails", "~> 4.2.6"
-  s.add_development_dependency "sqlite3"
+  s.add_development_dependency "sqlite3", "~> 1.3.11"
 end

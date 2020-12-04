@@ -1,6 +1,11 @@
 # UMD Lib Style
 
-Gem containing the common UMD Libraries Rails application layout and styles. Built on Bootstrap 3.3.6.
+Gem containing the common UMD Libraries Rails application layout and styles.
+Built on Bootstrap 3.3.6.
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for information about changes to this gem.
 
 ## Git Tagging
 
@@ -34,12 +39,14 @@ Then run the usual:
 $ bundle install
 ```
 
-Finally, edit your app's application files to use the scripts, styles, and layouts:
+Finally, edit your app's application files to use the scripts, styles, and
+layouts:
 
 1. Add `//= require umd_lib` to *app/assets/javascripts/application.js*
 2. Rename *app/assets/stylesheets/application.css* to *application.scss*
 3. Add `@import "umd_lib";` to *app/assets/stylesheets/application.scss*
-4. Change the contents of *app/views/layouts/application.html.erb* to the following:
+4. Change the contents of *app/views/layouts/application.html.erb* to the
+following:
 
     ```erb
     <% provide :app_name, 'My UMD Libraries App' %>
@@ -48,26 +55,33 @@ Finally, edit your app's application files to use the scripts, styles, and layou
 
 ## Bootstrap Notes
 
-This gem uses [Bootstrap SASS version 3.3.6][1]. The Bootstrap assets are copied directly into the [vendor/assets](vendor/assets) directory.
+This gem uses [Bootstrap SASS version 3.3.6][1]. The Bootstrap assets are copied
+directly into the [vendor/assets](vendor/assets) directory.
 
-If you are starting from an app that already loaded Bootstrap directly into your CSS or Javascript, you must *replace* the relevant `require` or `@import` statements with the ones to load `umd_lib` listed above.
+If you are starting from an app that already loaded Bootstrap directly into your
+CSS or Javascript, you must *replace* the relevant `require` or `@import`
+statements with the ones to load `umd_lib` listed above.
 
-In addition, your app will no longer need the `bootstrap-sass` gem and you can remove it from your Gemfile.
+In addition, your app will no longer need the `bootstrap-sass` gem and you can
+remove it from your Gemfile.
 
 ## Scaffolding CSS
 
-If you generated your app with Rails scaffolding, you should remove the *app/assets/stylesheets/scaffold.css.scss* file, to remove any potential conflicts with the Bootstrap styles.
+If you generated your app with Rails scaffolding, you should remove the
+*app/assets/stylesheets/scaffold.css.scss* file, to remove any potential
+conflicts with the Bootstrap styles.
 
 ## content_for blocks
 
-The "content_for" block allows for additions/customization of particular sections of the layout.
+The "content_for" block allows for additions/customization of particular
+sections of the layout.
 
 ### Additional "head" content - additional_head_content
 
 Enables additional directives to be added into the "head" section of the HTML
 page.
 
-#### Sample Usage
+#### Additional "head" content - Sample Usage
 
 In Rails 5.2, an additional "csp_meta" tag is added into the "head" section of
 the layouts/application.html.erb file. To include this tag into a Rails
@@ -82,11 +96,14 @@ application using this gem, add a `content_for` block to your
 
 ### Custom Navbar - navbar
 
-This gem provides a fixed full page width navigation bar at the top of the page, containing the application name and a set of drop-down menus.
+This gem provides a fixed full page width navigation bar at the top of the page,
+containing the application name and a set of drop-down menus.
 
-#### Sample Usage
+#### Custom Navbar - Sample Usage
 
-The application name is set using a "app_name" block. To include your own custom markup in the navbar, add a `content_for` block to your *app/views/layout/application.html.erb* file.
+The application name is set using a "app_name" block. To include your own custom
+markup in the navbar, add a `content_for` block to your
+*app/views/layout/application.html.erb* file.
 
 ```erb
 <% provide :app_name, 'Autonumber Service' %>
@@ -104,9 +121,11 @@ The application name is set using a "app_name" block. To include your own custom
 
 ### Custom Nav Banner - "navbar_banner"
 
-Displays a full page width banner directly below the navbar, which will not scroll off the screen. Used by the Annual Staffing Request application to show a banner when impersonating another user.
+Displays a full page width banner directly below the navbar, which will not
+scroll off the screen. Used by the Annual Staffing Request application to show a
+banner when impersonating another user.
 
-#### Sample Usage
+#### Custom Nav Banner - Sample Usage
 
 ```erb
 <% content_for :navbar_banner do %>
@@ -116,18 +135,32 @@ Displays a full page width banner directly below the navbar, which will not scro
 
 ### Environment Banner
 
-In keeping with [SSDR policy][2], an "environment banner" will be displayed at the top of each page when running on non-production servers, indicating whether the application is running on a "Local", "Development", or "Staging" server. This banner does _not_ appear on production systems.
+In keeping with [SSDR policy][2], an "environment banner" will be displayed at
+the top of each page when running on non-production servers.
 
-The environment banner will attempt to auto-detect the correct environment. To override this auto-detection functionality (or to modify it for testing), an "ENVIRONMENT_BANNER" environment banner can be used with any of the following values (which are case-insensitive):
+By default, in the local development environment (determined by
+`Rails.env.development?` returning `true`), a "Local Environment" banner will be
+displayed.
 
- * "Local"
- * "Development"
- * "Staging"
- * "Production" - This is only needed to force the "production" setting (i.e., not show the banner) on a server that would otherwise show some other value. Production systems do _not_ need to set this value.
+On non-production servers, the environment banner can be configured using the
+following environment variables:
+
+* ENVIRONMENT_BANNER - the text to display in the banner
+* ENVIRONMENT_BANNER_FOREGROUND - the foreground color for the banner, as a CSS
+  color
+* ENVIRONMENT_BANNER_BACKGROUND - the background color for the banner, as a CSS
+  color
+* ENVIRONMENT_BANNER_ENABLED - (optional) "false" (case-sensitive) disables the
+  banner. Anything else (including blank, or not providing the variable) enables
+  the banner.
 
 ### Page Content Container class
 
- By default, the content of the page is placed in a \<div> using the Bootstrap "container" class. Applications (such as Annual Staffing Request) may wish to override this setting to use some other class, such as "container-fluid". To do so, add the following "provide" line to your *app/views/layout/application.html.erb* file:
+ By default, the content of the page is placed in a \<div> using the Bootstrap
+ "container" class. Applications (such as Annual Staffing Request) may wish to
+ override this setting to use some other class, such as "container-fluid". To do
+ so, add the following "provide" line to your
+ *app/views/layout/application.html.erb* file:
 
 ```erb
 <% provide :container_class, "container-fluid" %>
@@ -140,7 +173,7 @@ default. Applications wishing to override the default footer can do so by
 defining a "content_for" block to your *app/views/layout/application.html.erb*
 file.
 
-#### Sample Usage
+#### Footer - Sample Usage
 
 ```erb
 <% content_for :application_footer do %>
