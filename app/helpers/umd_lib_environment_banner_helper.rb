@@ -120,7 +120,7 @@ module UMDLibEnvironmentBannerHelper
 
       # Returns true if the banner should be displayed, false otherwise.
       #
-      # text - the text (if any) being displayedin the banner
+      # text - the text (if any) being displayed in the banner
       def banner_enabled(text)
         env_var_enabled = ENV['ENVIRONMENT_BANNER_ENABLED']
         env_var_enabled = ENV.has_key?('ENVIRONMENT_BANNER_ENABLED') ? ENV['ENVIRONMENT_BANNER_ENABLED'] : ''

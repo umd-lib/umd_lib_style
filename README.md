@@ -150,8 +150,8 @@ following environment variables:
   color
 * ENVIRONMENT_BANNER_BACKGROUND - the background color for the banner, as a CSS
   color
-* ENVIRONMENT_BANNER_ENABLED - (optional) Anything other than "true" disables
-  the banner.
+* ENVIRONMENT_BANNER_ENABLED - (optional) Anything other than "true" (or blank)
+  disables the banner.
 
 ### Page Content Container class
 
