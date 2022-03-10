@@ -8,6 +8,9 @@ test/dummy/tmp/
 test/dummy/.sass-cache
 vendor/ruby
 
-# Ignoreing Gemfile.lock because this is gem, not an application
+# Ignoring Gemfile.lock because this is gem, not an application
 # See https://yehudakatz.com/2010/12/16/clarifying-the-roles-of-the-gemspec-and-gemfile/
 Gemfile.lock
+
+/node_modules
+yarn.lock
