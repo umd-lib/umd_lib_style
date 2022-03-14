@@ -6,6 +6,10 @@ This document records notable changes to the functionality of this gem.
 
 Note: Only changes that affect behavior need to be recorded.
 
+## 3.0.0
+
+* Support Rails 6.1 and webpacker.
+
 ## 2.0.0
 
 * API-breaking change to the behavior of the environment banner. The

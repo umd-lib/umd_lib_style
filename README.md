@@ -1,7 +1,7 @@
 # UMD Lib Style
 
 Gem containing the common UMD Libraries Rails application layout and styles.
-Built on Bootstrap 3.3.6.
+Built on Bootstrap 3.4.1, and designed to support Rails 6.1 and webpacker.
 
 ## Changelog
 
@@ -14,56 +14,102 @@ number in the lib/umd_style/version.rb to match the Git tag.
 
 ## Usage
 
-In your app's Gemfile:
+Make the following changes in your Rails project:
+
+### Gemfile
+
+Add the "umd_lib_style" gem. To use the "develop" branch version:
 
 ```ruby
 gem 'umd_lib_style', github: 'umd-lib/umd_lib_style', branch: 'develop'
 ```
 
-to use the "develop" branch version of the gem, or
+or to use a specific version:
 
 ```ruby
 gem 'umd_lib_style', github: 'umd-lib/umd_lib_style', ref: '<GIT_TAG>'
 ```
 
 where <GIT_TAG> is the Git tag of the version to use. For example, to use
-the Git tagged "1.0.1" version, use:
+the Git tagged "3.0.0" version, use:
 
 ```ruby
-gem 'umd_lib_style', github: 'umd-lib/umd_lib_style', ref: '1.0.1'
+gem 'umd_lib_style', github: 'umd-lib/umd_lib_style', ref: '3.0.0'
 ```
 
-Then run the usual:
+### package.json
 
+Add the following lines:
+
+```json
+    "bootstrap": "3.4.1",
+    "jquery": "3.6.0",
 ```
+
+Note: The versions should match the respective versions in the
+"package.json" file of the "umd_lib_style" version you are using.
+
+### app/assets/stylesheets/application.scss
+
+If necessary, rename the "app/assets/stylesheets/application.css" file to
+"app/assets/stylesheets/application.scss" and add the following line:
+
+```javascript
+@import "umd_lib";
+```
+
+### app/javascript/packs/application.js
+
+Add the following line:
+
+```javascript
+import 'bootstrap/dist/js/bootstrap';
+```
+
+### config/webpack/environment.js
+
+Add the following lines:
+
+```javascript
+const webpack = require('webpack')
+
+environment.plugins.append('Provide', new webpack.ProvidePlugin({
+  $: 'jquery/src/jquery',
+  jQuery: 'jquery/src/jquery'
+}));
+```
+
+### app/views/layouts/application.html.erb
+
+Remove the existing comnent and replace with the following:
+
+```erb
+<% provide :app_name, 'APP_NAME' %>
+<%= render 'layouts/umd_lib' %>
+```
+
+changing "APP_NAME" to your application name.
+
+After making the above changes, run:
+
+```bash
 $ bundle install
+$ yarn
 ```
 
-Finally, edit your app's application files to use the scripts, styles, and
-layouts:
+## Upgrading from v2 to v3
 
-1. Add `//= require umd_lib` to *app/assets/javascripts/application.js*
-2. Rename *app/assets/stylesheets/application.css* to *application.scss*
-3. Add `@import "umd_lib";` to *app/assets/stylesheets/application.scss*
-4. Change the contents of *app/views/layouts/application.html.erb* to the
-following:
+Applications that use version 2.x of "umd_lib_style" (such as the
+[umd-handle](https://github.com/umd-lib/umd-handle)) will require the
+following changes for v3:
 
-    ```erb
-    <% provide :app_name, 'My UMD Libraries App' %>
-    <%= render 'layouts/umd_lib' %>
-    ```
+1) Application must be upgraded to Rails 6.1
 
-## Bootstrap Notes
+2) Application must use Ruby 2.7.5 (or later)
 
-This gem uses [Bootstrap SASS version 3.3.6][1]. The Bootstrap assets are copied
-directly into the [vendor/assets](vendor/assets) directory.
-
-If you are starting from an app that already loaded Bootstrap directly into your
-CSS or Javascript, you must *replace* the relevant `require` or `@import`
-statements with the ones to load `umd_lib` listed above.
-
-In addition, your app will no longer need the `bootstrap-sass` gem and you can
-remove it from your Gemfile.
+3) The "app/views/layouts/_umd_lib.html.erb" file in "umd_lib_style" now
+uses the "javascript_pack_tag" tag, so any custom
+"app/views/layouts/_umd_lib.html.erb" file in the application can be removed.
 
 ## Scaffolding CSS
 
@@ -135,7 +181,7 @@ banner when impersonating another user.
 
 ### Environment Banner
 
-In keeping with [SSDR policy][2], an "environment banner" will be displayed at
+In keeping with [SSDR policy][1], an "environment banner" will be displayed at
 the top of each page when running on non-production servers.
 
 By default, in the local development environment (determined by
@@ -183,5 +229,14 @@ file.
 <% end %>
 ```
 
-[1]: https://github.com/twbs/bootstrap-sass/archive/v3.3.6.tar.gz
-[2]: https://confluence.umd.edu/display/LIB/Create+Environment+Banners
+## umd_lib_style Development
+
+Unit tests can be run using the following command:
+
+```bash
+$ bundle install
+$ yarn
+$ rails test
+```
+
+[1]: https://confluence.umd.edu/display/LIB/Create+Environment+Banners
